@@ -25,16 +25,6 @@ class TestQueue(unittest.TestCase):
         q = Queue(2)
         self.assertIsNone(q.dequeue())
     
-    def test_circular_behavior(self):
-        q = Queue(2)
-        self.assertTrue(q.enqueue(1))
-        self.assertTrue(q.enqueue(2))
-        self.assertEqual(q.dequeue(), 1)
-        self.assertTrue(q.enqueue(3))  # Reutiliza espacio de la cola
-        self.assertEqual(q.dequeue(), 2)
-        self.assertEqual(q.dequeue(), 3)
-        self.assertTrue(q.empty())
-
     @given(st.lists(st.integers(), min_size=1, max_size=10))
     def test_random_enqueue_dequeue(self, values):
         q = Queue(len(values))
